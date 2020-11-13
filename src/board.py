@@ -30,10 +30,7 @@ class Board:
         self.map = Board()
         value_lists = read_from_file(file_name, difficulty)
         for line in value_lists:
-            for value in line:
-                
-
-        
+            for value in line:     
 
     #Puts value in cell
     def place_value(self, x_coord, y_coord, value):
