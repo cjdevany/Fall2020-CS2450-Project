@@ -2,7 +2,6 @@
 import pygame
 import math
 
-pygame.font.init()
 
 # TODO: Change colors as wanted
 
@@ -34,6 +33,7 @@ pygame.display.set_caption("Sudoku Board Test")
 # pygame.display.set_icon(img)
 
 # Fonts
+pygame.font.init()
 font1 = pygame.font.SysFont('comicsans', 40)
 font2 = pygame.font.SysFont('comicsans', 20)
 

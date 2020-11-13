@@ -22,13 +22,14 @@ class Board:
 
     
     def __init__(self, file_name):
-        
+        return None
 
     #Puts value in cell
-    def place_value(self, x_coord, y_coord):
-
+    def place_value(self, value,  x_coord, y_coord):
+        return None
     #Gets value in cell
     def get_value(self, x_coord, y_coord):
+        return None
 
     #Reads file to a 2-D array
     def read_from_file(self, file_name, difficulty):
@@ -38,13 +39,14 @@ class Board:
         game_file = directory + file_name + game_number
         file = open(game_file, "r")
         
-        if lower_difficulty == 'easy':
-            
-        if lower_difficulty == 'medium':
+        # Get list of lines from file.
+        lines = file.readlines
+        values_in_line = lines.strip()
+        for line in lines:
 
-        if lower_difficulty == 'hard':
         
         file.close()
 
     #solves the sudoku puzzle
     def solve(self):
+        return None

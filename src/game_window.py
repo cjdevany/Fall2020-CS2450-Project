@@ -9,4 +9,4 @@ from .board import Board
 class Game_Window:
     """
     """
-    def __init__(self):
+    def __init__(self)
