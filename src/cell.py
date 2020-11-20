@@ -27,6 +27,10 @@ class Cell:
         self.value = value
         # we don't need candidates, as this one is constructed with the right answer.
         self.candidates = None
+    
+    def __repr__(self):
+        toStr = 'Value: ' + self.value + 'Key: ' + self.key + 'Candidates: ' + self.candidates
+        return toStr
         
     def get_value(self):
         """ Returns current cell value """
