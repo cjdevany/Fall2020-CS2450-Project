@@ -1,5 +1,5 @@
 import unittest
-from cell import *
+from src.cell import *
 
 class Cell_Test(unittest.TestCase):
 
@@ -51,3 +51,10 @@ class Cell_Test(unittest.TestCase):
         test_cell = Cell()
         test_cell.set_candidate(1, True)
         self.assertEqual(test_cell.get_candidates, [1])
+    
+    def get_candidates_none_test(self):
+        test_cell = Cell(1)
+        self.assertIsNone(test_cell.get_candidates())
+
+if __name__ == "__main__":
+    unittest.main()

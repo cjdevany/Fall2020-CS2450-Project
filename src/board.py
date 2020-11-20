@@ -4,7 +4,7 @@
 # Authors: Shadrac Reyes, Kelton Palmer, Kory Adams, Corey De Vany
 #-------------------------------------------------------------------e
 import array
-from cell import *
+from src.cell import *
 from random import randrange
 import numpy
 
@@ -27,8 +27,8 @@ class Board:
         self.map = []
         for i in range(10):
             map.append([Cell()] * 9)
-            
-        value_lists = read_from_file(file_name)
+        
+        value_lists = self.read_file(file_name)
         for line, line_index in value_lists:
             for value, val_index in line:   
                 if (value != 0):
@@ -36,6 +36,36 @@ class Board:
                 else:
                     map[line_index][val_index] = Cell()
 
+
+    # Reads a game file into a 2-D int array
+    def read_file(file_name="easy1.txt"):
+        """
+        Reads a board game info from a file and returns a 2d array of those values.
+
+        Keyword arguments:
+        file_name: the name of the file we are reading
+        """
+
+        # Open the file
+        game_file = "..\\game\\" + file_name
+        file = open(game_file, "r")
+        
+        # Get lines from file
+        lines = file.readlines()
+
+        file_array = []
+
+        # For each line in the line array, get an array of 
+        # values, if the value is not zero, set the value
+        # in that position.
+        for line in lines:
+            int_value_array = line.split()
+            int_value_array = numpy.array(int_value_array).astype('int').tolist()
+            file_array.append(int_value_array)
+
+        file.close()
+
+        return file_array
 
     def __repr__(self):
         """ Returns a string representation of our map values. """
@@ -74,40 +104,12 @@ class Board:
         """
         return self.map[y_coord][x_coord].get_value()
 
-    # Reads a game file into a 2-D int array
-    def read_from_file(self, file_name):
-        """
-        Reads a board game info from a file and returns a 2d array of those values.
 
-        Keyword arguments:
-        file_name: the name of the file we are reading
-        """
-
-        # Open the file
-        game_file = "..\\game\\" + file_name
-        file = open(game_file, "r")
-        
-        # Get lines from file
-        lines = file.readlines()
-
-        file_array = []
-
-        # For each line in the line array, get an array of 
-        # values, if the value is not zero, set the value
-        # in that position.
-        for line in lines:
-            int_value_array = line.split()
-            int_value_array = numpy.array(int_value_array).astype('int').tolist()
-            file_array.append(int_value_array)
-
-        file.close()
-
-        return file_array
             
 
     #solves the sudoku puzzle
 #    def solve(self):
-#
+
     # def __is_for_row(self, row, value):
 
     # def __is_valid_for_col(self, col, value):
@@ -117,5 +119,3 @@ class Board:
     # def __is_valid_for_position(self, row, col, value):
 
     # def __verify(self):
-
-        

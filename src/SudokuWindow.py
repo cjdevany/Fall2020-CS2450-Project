@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_SudokuWindow(object):
+class SudokuWindow(object):
     def setupUi(self, SudokuWindow):
         SudokuWindow.setObjectName("SudokuWindow")
         SudokuWindow.resize(602, 624)
