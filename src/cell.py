@@ -12,26 +12,18 @@ The bool array's indices represent if an integer is within the candidates list o
 """
 
 class Cell:
-    def __init__(self):
-        """ Null Constructor sets value and key to 0. """
-        self.key = 0
-        self.value = 0
-        self.candidates = [False]*10
-
-    def __init__(self, value):
+    def __init__(self, value=0):
         """ 
         Takes a value and assigns it to key and value. 
-        This constructor is only used when the right answer is known at construction time.
         """
         self.key = value
         self.value = value
-        # we don't need candidates, as this one is constructed with the right answer.
-        self.candidates = None
+        self.candidates = [False]*10
+        self.index = -1
     
     def __repr__(self):
-        toStr = 'Value: ' + self.value + 'Key: ' + self.key + 'Candidates: ' + self.candidates
-        return toStr
-        
+        return str(self.value)
+
     def get_value(self):
         """ Returns current cell value """
         return self.value
@@ -55,17 +47,9 @@ class Cell:
         else:
             return False
     
-    def get_candidates(self):
-        """ Returns this cells candidates as a list of integers for display purposes. """
-        true_candidates = []
-        for index, current_candidate in enumerate(self.candidates):
-            if index >= 10:
-                break
-
-            if current_candidate:
-                true_candidates.append(index)
-
-        return true_candidates
+    def get_candidate(self, index):
+        """ Returns True/False if a candidate is present within a cell. """
+        return candidates[index]
 
     def set_candidate(self, index, value):
         """ Marks a candidate within the candidate list with the boolean value passed to it. """

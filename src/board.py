@@ -4,7 +4,7 @@
 # Authors: Shadrac Reyes, Kelton Palmer, Kory Adams, Corey De Vany
 #-------------------------------------------------------------------e
 import array
-from src.cell import *
+from cell import Cell
 from random import randrange
 import numpy
 
@@ -16,54 +16,53 @@ A map is a 9x9 2-d array of Cell objects.
 
 class Board:
 
-    #constructs an empty map
-    def __init__(self):
-        self.map = []
-        for i in range(10):
-            map.append([Cell()] * 9)
-
     # Overload
-    def __init__(self, file_name):
+    def __init__(self, file_name="easy1_sol.txt"):
         self.map = []
-        for i in range(10):
-            map.append([Cell()] * 9)
-        
-        value_lists = self.read_file(file_name)
-        for line, line_index in value_lists:
-            for value, val_index in line:   
-                if (value != 0):
-                    map[line_index][val_index] = Cell(value)
-                else:
-                    map[line_index][val_index] = Cell()
+        self.values = self.read_file(file_name)
+        for line in self.values:
+            l = []
+            for value in line:
+                l.append(Cell(value))
+            
+            self.map.append(l)
+
+
+
+    def __iter__(self):
+        return (cell for cell in self.map)
 
 
     # Reads a game file into a 2-D int array
-    def read_file(file_name="easy1.txt"):
+    def read_file(self, file_name):
         """
         Reads a board game info from a file and returns a 2d array of those values.
 
         Keyword arguments:
         file_name: the name of the file we are reading
         """
+        file_array = []
 
         # Open the file
-        game_file = "..\\game\\" + file_name
+        game_file = "game/" + file_name
         file = open(game_file, "r")
         
         # Get lines from file
         lines = file.readlines()
 
-        file_array = []
-
-        # For each line in the line array, get an array of 
-        # values, if the value is not zero, set the value
-        # in that position.
-        for line in lines:
-            int_value_array = line.split()
-            int_value_array = numpy.array(int_value_array).astype('int').tolist()
-            file_array.append(int_value_array)
-
         file.close()
+
+        # Iterate over each line in the file
+        for line in lines:
+            # Remove the newline and spaces
+            line = line.rstrip('\n')
+            line = line.replace(" ", "")
+
+            # Convert the string into a list of ints
+            line = list(map(int, line))
+
+            # Put the line into the file array.
+            file_array.append(line)
 
         return file_array
 
@@ -73,15 +72,16 @@ class Board:
 
         for row in self.map:
             row_string = ''
+            
             for col in row:
-                row_string += str(self.map[row][col].get_value)
+                row_string += str(self.map[row][col].get_value())
                 row_string += ' '
 
             rep.append(row_string)
         return rep
 
     #Puts value in cell
-    def place_value(self, x_coord, y_coord, value):
+    def set_value(self, x_coord, y_coord, value):
         """
         Places a given value at a given (x,y) position in the
         2d array representation of the game map.
@@ -104,18 +104,56 @@ class Board:
         """
         return self.map[y_coord][x_coord].get_value()
 
+    # Returns the entire board
+    def get_board(self):
+        return self.map
 
+
+    def set_candidate(self, x_coord, y_coord, candidate, value):
+        """
+        Given a (x, y) position in the 2d array representation of the game map
+        marks a candidate within the candidate list with the boolean value passed to it.
+
+        Keyword arguments:
+        x_coord: The x-coordinate in the 2d array.
+        y_coord: The y-coordinate in the 2d array.
+        index: The index in the candidates array that will be set to value
+        value: Boolean value an index within the candidates array will be set to
+        """
+        self.map[y_coord][x_coord].set_candidate(candidate-1, value)
+    
+    def get_candidate(self, x_coord, y_coord, candidate):
+        """
+        Given a (x, y) position of a cell in the 2d array representation of the game map
+        gets the boolean value of a specific candidate within the cell.
+
+        Keyword arguments:
+        x_coord: The x-coordinate in the 2d array.
+        y_coord: The y-coordinate in the 2d array.
+        candidate: The candidate whose value is needed.
+        """
+        return self.map[y_coord][x_coord].get_candidate(candidate-1)
             
-
     #solves the sudoku puzzle
-#    def solve(self):
+    # def solve(self):
 
-    # def __is_for_row(self, row, value):
-
+    # def __is_valid_for_row(self, row, value):
+        
+        
     # def __is_valid_for_col(self, col, value):
+        
 
-    # def __is_valid_for_box(self, row, col, value):
+    # def __is_valid_for_box(self, box_start_row, col_start_row, value):
+        
 
     # def __is_valid_for_position(self, row, col, value):
 
     # def __verify(self):
+
+    def print(self):
+        for cell in self.map:
+            print(cell)
+
+if __name__ == "__main__":
+    b = Board('easy1_sol.txt')
+    b.print()
