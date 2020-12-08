@@ -66,6 +66,12 @@ class Board:
 
         return file_array
 
+    def pop_solution(self, filename="easy1.txt"):
+        file_substring = filename.split('.')
+        difficulty = file_substring[0]
+        
+        
+
     def __repr__(self):
         """ Returns a string representation of our map values. """
         rep = []
@@ -134,21 +140,6 @@ class Board:
         """
         return self.map[y_coord][x_coord].get_candidate(candidate-1)
             
-    #solves the sudoku puzzle
-    # def solve(self):
-
-    # def __is_valid_for_row(self, row, value):
-        
-        
-    # def __is_valid_for_col(self, col, value):
-        
-
-    # def __is_valid_for_box(self, box_start_row, col_start_row, value):
-        
-
-    # def __is_valid_for_position(self, row, col, value):
-
-    # def __verify(self):
 
     def print(self):
         for cell in self.map:

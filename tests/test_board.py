@@ -5,7 +5,7 @@ import board
 class Board_Test(unittest.TestCase):
 
     def TEST_FILE_CONSTANT(self):
-        return "/game/solved/easy1_sol.txt"
+        return "/game/easy1.txt"
 
     def constructor_test(self):
         test_board = board(TEST_FILE_CONSTANT())
@@ -43,8 +43,8 @@ class Board_Test(unittest.TestCase):
 
     def get_candidates_from_cell_test(self):
         test_board = board()
-        candidate_value = test_board.get_candidate(0, 0, 1)
-        self.assertFalse(test_board.get_candidate(0, 0, 1))
+        test_board.set_candidate(0, 0, 1, True)
+        self.assertTrue(test_board.get_candidate(0, 0, 1))
 
 
     def set_value_in_cell_test(self):

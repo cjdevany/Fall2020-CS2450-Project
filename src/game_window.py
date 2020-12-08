@@ -30,8 +30,8 @@ WHITE = (255, 255, 255)
 LIGHTGRAY = (200, 200, 200)
 
 # Fonts
-font1 = pygame.font.SysFont("comicsans", 40) 
-font2 = pygame.font.SysFont("comicsans", 20) 
+font1 = pygame.font.SysFont("comicsans", 40)
+font2 = pygame.font.SysFont("comicsans", 20)
 
 # Draw the cells for the sudoku grid
 def draw_cells(game_board):    
